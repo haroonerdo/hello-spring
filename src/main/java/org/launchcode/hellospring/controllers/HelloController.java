@@ -39,6 +39,7 @@ public class HelloController {
     @GetMapping("hello/{name}")
     @ResponseBody
     public String helloWithPathParam(@PathVariable String name) {
+
         String  greeting= "Hello, " + name + "!";
         return greeting;
     }
@@ -67,26 +68,26 @@ public class HelloController {
     @RequestMapping(value = "hello", method = RequestMethod.POST)
     @ResponseBody
     public String helloPost(@RequestParam String name, @RequestParam String language) {
-        if (name == null) {
+        if (name.isEmpty()) {
             name = "World";
         }
         return createMessage(name, language);
     }
 
-    public static String createMessage(String nm, String lng) {
+    public static String createMessage(String name, String language) {
         String greeting="";
-        if (lng.equals("english")) {
+        if (language.equals("english")) {
             greeting = "Hello";
-        } else if (lng.equals("french")) {
+        } else if (language.equals("french")) {
             greeting = "Bonjour";
-        }else if (lng.equals("spanish")) {
+        }else if (language.equals("spanish")) {
             greeting = "Hola";
-        }else if (lng.equals("italian")) {
+        }else if (language.equals("italian")) {
             greeting = "Bonjourno";
-        }else if (lng.equals("turkish")) {
+        }else if (language.equals("turkish")) {
             greeting = "Merhaba";
         }
-        String str = greeting +", "+ nm + "!";;
+        String str = greeting +", "+ name + "!";;
        return str;
     }
 }
